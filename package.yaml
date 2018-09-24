@@ -1,0 +1,36 @@
+name:                cacophony-libsecp256k1
+version:             0.1.0.0
+github:              "tumist/cacophony-libsecp256k1"
+license:             PublicDomain
+maintainer:          "tumi.st@gmail.com"
+
+extra-source-files:
+- README.md
+
+synopsis:            Noise Secp256k1 DH module
+category:            Cryptography
+description:         Noise Secp256k1 DH module using haskoin's secp256k1-haskell library
+
+dependencies:
+- base >= 4.7 && < 5
+- cacophony == 0.10.0
+- cryptonite >= 0.22
+- bytestring
+- memory
+- secp256k1-haskell
+
+library:
+  source-dirs: src
+  exposed-modules:
+    - Crypto.Noise.DH.Secp256k1
+
+# tests:
+#   cacophony-libsecp256k1-test:
+#     main:                Spec.hs
+#     source-dirs:         test
+#     ghc-options:
+#     - -threaded
+#     - -rtsopts
+#     - -with-rtsopts=-N
+#     dependencies:
+#     - cacophony-libsecp256k1
