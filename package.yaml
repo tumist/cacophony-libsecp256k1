@@ -13,7 +13,7 @@ description:         Noise Secp256k1 DH module using haskoin's secp256k1-haskell
 
 dependencies:
 - base >= 4.7 && < 5
-- cacophony == 0.10.0
+- cacophony >= 0.10.1
 - cryptonite >= 0.22
 - bytestring
 - memory

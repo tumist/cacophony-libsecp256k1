@@ -2,11 +2,9 @@ resolver: lts-12.10
 packages:
   - .
 extra-deps:
-# Cacophony on lts-12.10 resolver
-  - git: https://github.com/tumist/cacophony.git
-    commit: 60cdd4e24708035f5c7afc72583d0e9acc908653
+  - cacophony-0.10.1
 # secp256k1-haskell with ecdh function
   - git: https://github.com/tumist/secp256k1-haskell.git
-    commit: 347cd58fde246f52b70e64420a140aa0be884078
+    commit: 69d5cddb9a1805c98643f0aaa90fa028bc0138b1
 flags: {}
 extra-package-dbs: []
