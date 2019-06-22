@@ -1,8 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies #-}
 module Crypto.Noise.DH.Secp256k1
-  ( -- * Types
-    Secp256k1
+  ( Secp256k1
+  , dhFromSecKey
+  , dhFromPubKey
   ) where
 
 import Crypto.Random.Entropy       (getEntropy)
@@ -32,8 +33,7 @@ genKey :: IO (KeyPair Secp256k1)
 genKey = do
   r <- getEntropy 32 :: IO ByteString
   let (Just sec) = S.secKey r
-  let pub = S.derivePubKey sec
-  return $ (SKSecp256k1 sec, PKSecp256k1 pub)
+  return $ dhFromSecKey sec
 
 dh :: SecretKey Secp256k1 -> PublicKey Secp256k1 -> ScrubbedBytes
 dh (SKSecp256k1 sk) (PKSecp256k1 pk) = convert $ S.ecdh pk sk
@@ -48,9 +48,13 @@ secToBytes :: SecretKey Secp256k1 -> ScrubbedBytes
 secToBytes (SKSecp256k1 sk) = convert $ S.getSecKey sk
 
 bytesToPair :: ScrubbedBytes -> Maybe (KeyPair Secp256k1)
-bytesToPair b = keyPair <$> S.secKey (convert b)
-  where
-    keyPair sk = (SKSecp256k1 sk, PKSecp256k1 (S.derivePubKey sk))
+bytesToPair b = dhFromSecKey <$> S.secKey (convert b)
 
 pubEq :: PublicKey Secp256k1 -> PublicKey Secp256k1 -> Bool
 pubEq = (==)
+
+dhFromSecKey :: S.SecKey -> KeyPair Secp256k1
+dhFromSecKey sk = (SKSecp256k1 sk, PKSecp256k1 (S.derivePubKey sk))
+
+dhFromPubKey :: S.PubKey -> PublicKey Secp256k1
+dhFromPubKey = PKSecp256k1
