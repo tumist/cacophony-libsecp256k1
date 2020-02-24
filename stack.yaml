@@ -1,10 +1,9 @@
-resolver: lts-12.10
+resolver: lts-15.1
 packages:
   - .
 extra-deps:
   - cacophony-0.10.1
-# secp256k1-haskell with ecdh function
-  - git: https://github.com/tumist/secp256k1-haskell.git
-    commit: 69d5cddb9a1805c98643f0aaa90fa028bc0138b1
-flags: {}
+flags:
+  secp256k1-haskell:
+    ecdh: true
 extra-package-dbs: []
