@@ -1,5 +1,5 @@
 name:                cacophony-libsecp256k1
-version:             0.1.0.0
+version:             0.1.0.1
 github:              "tumist/cacophony-libsecp256k1"
 license:             PublicDomain
 maintainer:          "tumi.st@gmail.com"
